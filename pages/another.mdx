@@ -1,5 +1,7 @@
 # Another Page
 
+Also called second page.
+
 ```js filename="demo.js" {3} copy
 let a = 1;
 
@@ -9,6 +11,12 @@ console.log(a);
 ## Component
 
 import { useState } from 'react'
+
+
+
+
+
+
 
 {/* Import CSS modules */}
 import styles from '../components/counters.module.css'
@@ -29,3 +37,8 @@ export const Counter = () => {
 import Counters from '../components/counters'
 
 <Counters />
+
+import ComponentWithNoSSR from '../components/flowchartwrap'
+
+
+<ComponentWithNoSSR />
