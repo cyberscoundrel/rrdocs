@@ -1,4 +1,6 @@
-// Example from https://beta.reactjs.org/learn
+
+
+'use client'
 
 import { useState } from 'react'
 import styles from './counters.module.css'
