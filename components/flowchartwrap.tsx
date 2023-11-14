@@ -12,7 +12,7 @@ type Foo = {
   };
 
 
-const symbolregex = /([a-zA-Z0-9]+)\=\>([a-zA-Z0-9]+): ([a-zA-Z0-9 ]+)\|([a-zA-Z0-9]+)/
+const symbolregex = /([a-zA-Z0-9]+)\=\>([a-zA-Z0-9]+)(?>: ([a-zA-Z0-9 ]+)(?>(?>\|([a-zA-Z0-9]+))|(\?)?))/
 const seqregex = /([a-zA-Z0-9]+)\(([a-zA-Z0-9]+)\)/
 
   
@@ -70,6 +70,44 @@ const ComponentWithNoSSR = dynamic<Foo>(
   
 )
 
+function parseFlowChart(s) {
+  
+
+  let symmap = new Map()
+  let matches = s.match(symbolregex)
+
+  let co: any = {}
+  let ct = 0
+
+  
+
+  for(let match of matches) {
+    if(match.match(symbolregex)) {
+
+      co = {}
+      ct = 0
+      continue
+    }
+    switch(ct) {
+      case 1:
+        
+        co.name = match
+        break
+      case 2:
+        co.type = match
+        break
+      case 3:
+        co.text = match
+        break
+
+    }
+
+
+
+  }
+
+}
+
 
 
 
@@ -77,10 +115,15 @@ const ComponentWithNoSSR = dynamic<Foo>(
 function NoSSRFlowchart() {
 
     const [count, setCount] = useState(0)
+    const [symmap, setSymmap] = useState(0)
 
   function handleClick() {
     setCount(count + 1)
   }
+
+
+
+
 
 
 
