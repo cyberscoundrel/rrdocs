@@ -70,22 +70,39 @@ const ComponentWithNoSSR = dynamic<Foo>(
   
 )
 
-function parseFlowChart(s) {
+
+
+interface fcsymbol {
+  name: string,
+  type: string,
+  text: string
+}
+
+class fcconditional implements fcsymbol {
+
+  
+
+}
+
+function parseFlowChart(s: string): Map<string, fcsymbol> {
   
 
   let symmap = new Map()
   let matches = s.match(symbolregex)
 
-  let co: any = {}
+  let co: fcsymbol = undefined
   let ct = 0
 
   
 
   for(let match of matches) {
-    if(match.match(symbolregex)) {
+    if(symbolregex.test(s)) {
+      if(co) {
+        symmap.set(co.name, co)
+      }
 
-      co = {}
-      ct = 0
+      co = new fcconditional()
+      ct = 1
       continue
     }
     switch(ct) {
@@ -99,8 +116,17 @@ function parseFlowChart(s) {
       case 3:
         co.text = match
         break
+      default:
+
 
     }
+    
+    
+    console.log(symmap)
+
+    return symmap
+    
+
 
 
 
@@ -108,11 +134,25 @@ function parseFlowChart(s) {
 
 }
 
+function parseRules(s: string, smap: Map<string, fcsymbol>) {
+  let matches = s.match(seqregex)
+
+  for(let match of matches) {
+
+
+  }
+
+
+}
 
 
 
 
-function NoSSRFlowchart() {
+
+
+
+
+function NoSSRFlowchart(props) {
 
     const [count, setCount] = useState(0)
     const [symmap, setSymmap] = useState(0)
@@ -120,6 +160,10 @@ function NoSSRFlowchart() {
   function handleClick() {
     setCount(count + 1)
   }
+
+  setSymmap(parseFlowChart(props.code))
+
+  
 
 
 
