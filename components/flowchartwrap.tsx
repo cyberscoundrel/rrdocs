@@ -13,7 +13,7 @@ type Foo = {
 
 
 const symbolregex = /([a-zA-Z0-9]+)\=\>([a-zA-Z0-9]+)(?>: ([a-zA-Z0-9 ]+)(?>(?>\|([a-zA-Z0-9]+))|(\?)?))/
-const seqregex = /([a-zA-Z0-9]+)\(([a-zA-Z0-9]+)\)/
+const seqregex = /([a-zA-Z0-9]+)(?:\(([a-zA-Z0-9]+)\)|)(->)?/
 
   
 
@@ -75,14 +75,13 @@ const ComponentWithNoSSR = dynamic<Foo>(
 interface fcsymbol {
   name: string,
   type: string,
-  text: string
+  text: string,
+  opts: Map<string, fcsymbol>
+  back: fcsymbol[]
+  link: string
 }
 
-class fcconditional implements fcsymbol {
 
-  
-
-}
 
 function parseFlowChart(s: string): Map<string, fcsymbol> {
   
@@ -101,7 +100,7 @@ function parseFlowChart(s: string): Map<string, fcsymbol> {
         symmap.set(co.name, co)
       }
 
-      co = new fcconditional()
+      co = {} as fcsymbol
       ct = 1
       continue
     }
@@ -122,9 +121,8 @@ function parseFlowChart(s: string): Map<string, fcsymbol> {
     }
     
     
-    console.log(symmap)
-
-    return symmap
+    
+    ct += 1
     
 
 
@@ -132,12 +130,45 @@ function parseFlowChart(s: string): Map<string, fcsymbol> {
 
   }
 
+  console.log(symmap)
+
+  return symmap
+
 }
 
 function parseRules(s: string, smap: Map<string, fcsymbol>) {
   let matches = s.match(seqregex)
 
+  let ct = 0
+  let opt : string = undefined
+  let last, curr : fcsymbol = null
+  
+
   for(let match of matches) {
+
+    if(seqregex.test(match)) {
+      ct = 0
+      continue
+    }
+
+    switch(ct) {
+      case 1:
+        if(smap.has(match)) {
+          curr = smap[match]
+        }
+        if(last && opt) {
+          curr.back.push(curr)
+          last.opts.add(opt)
+        }
+      case 3:
+        last = curr
+
+
+
+
+    }
+
+
 
 
   }
