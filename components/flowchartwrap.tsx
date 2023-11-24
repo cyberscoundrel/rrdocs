@@ -12,7 +12,7 @@ type Foo = {
   };
 
 
-const symbolregex = /([a-zA-Z0-9]+)\=\>([a-zA-Z0-9]+)(?>: ([a-zA-Z0-9 ]+)(?>(?>\|([a-zA-Z0-9]+))|(\?)?))/
+const symbolregex = /([a-zA-Z0-9]+)\=\>([a-zA-Z0-9]+)(?:: ([a-zA-Z0-9 ]+)(?:(?:\|([a-zA-Z0-9]+))|(\?)?))/
 const seqregex = /([a-zA-Z0-9]+)\(([a-zA-Z0-9]+)\)/
 
   
@@ -112,7 +112,7 @@ function parseFlowChart(s) {
 
 
 
-function NoSSRFlowchart() {
+function NoSSRFlowchart(props) {
 
     const [count, setCount] = useState(0)
     const [symmap, setSymmap] = useState(0)
@@ -138,7 +138,7 @@ function NoSSRFlowchart() {
 
   return (
     <div>
-        <ComponentWithNoSSR chartCode={code} options={opt}/>
+        <ComponentWithNoSSR chartCode={props.code} options={opt}/>
         <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
         <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
     </div>

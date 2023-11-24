@@ -2,43 +2,32 @@
 
 Also called second page.
 
-```js filename="demo.js" {3} copy
-let a = 1;
 
-console.log(a);
-```
-
-## Component
-
-import { useState } from 'react'
-
-
-
-
-
-
-
-{/* Import CSS modules */}
-import styles from '../components/counters.module.css'
-
-export const Counter = () => {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
-    </div>
-  );
-};
-
-<Counter/>
-
-## External Component
-
-import Counters from '../components/counters'
-
-<Counters />
 
 import ComponentWithNoSSR from '../components/flowchartwrap'
 
 
-<ComponentWithNoSSR />
+
+
+<ComponentWithNoSSR code={`st=>start: pick up
+
+e=>end: End
+
+op1=>operation: how can we help|department1
+
+
+
+sub=>subroutine: reservation procedure|external:>/reservation
+
+qp=>subroutine: question procedure
+
+cond=>condition: reservation?
+
+question=>condition: question?
+
+st(right)->op1(bottom)->cond(yes)->sub->op1
+
+cond(no)->question(yes)->qp(right)->op1(right)
+
+question(no)->e`}/>
+
