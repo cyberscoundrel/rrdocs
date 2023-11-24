@@ -1,0 +1,6 @@
+[submodule "src/nextra-theme-docs"]
+	path = src/nextra-theme-docs
+	url = https://github.com/shuding/nextra-theme-docs.git
+[submodule "src/react-simple-flowchart"]
+	path = src/react-simple-flowchart
+	url = https://github.com/alwinn1977/react-simple-flowchart.git
