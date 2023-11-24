@@ -1,0 +1,42 @@
+# Troubleshooting
+
+Everyday, some customers will have trouble with some part of the rental process or the equipment
+itself. It's important to have an outline in your head for how to properly handle our customers who are
+having difficulties with either. Here is a simplified guide for how to do that. In practice, it will never
+be as simple as this graph, but this is a good starting place as your knowledge of the equipment and our
+procedures grows.
+
+import ComponentWithNoSSR from '../components/flowchartwrap'
+
+<ComponentWithNoSSR code={
+    `st=>start: Customer has problem
+
+
+
+op1=>condition: Is it\nequipment\nrelated?
+
+op2=>condition: Do you know\nthe relevent\npolicies?
+
+op3=>condition: Do you\nunderstand\n the relevant\nequipment?
+
+op4=>condition: Is there an\nalternative\nway to\nserve the\ncustomer's\nneeds?
+
+op5=>operation: Evaluate equipment
+
+op6=>operation: Review relevant\npolicy with\n manager
+
+op7=>operation: Review relevant\nequipment with\nyour manager
+
+sub=>end: Refer to your manager
+
+sorry=>end: Politely apologize
+
+alt=>end: Change the customer's\nservice
+
+
+st(bottom)->op1(yes)->op3(yes)->op5
+op1(no,right)->op2(yes,bottom)->op4(no,bottom)->sorry
+op2(no)->op6
+op3(no,left)->op7`
+
+}/>
