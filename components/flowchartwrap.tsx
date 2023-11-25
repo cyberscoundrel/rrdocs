@@ -12,8 +12,9 @@ type Foo = {
   };
 
 
-const symbolregex = /([a-zA-Z0-9]+)\=\>([a-zA-Z0-9]+)(?>: ([a-zA-Z0-9 ]+)(?>(?>\|([a-zA-Z0-9]+))|(\?)?))/
-const seqregex = /([a-zA-Z0-9]+)(?:\(([a-zA-Z0-9]+)\)|)(->)?/
+//const symbolregex = /([a-zA-Z0-9]+)\=\>([a-zA-Z0-9]+)(?>: ([a-zA-Z0-9 ]+)(?>(?>\|([a-zA-Z0-9]+))|(\?)?))/
+const symbolregex = /([a-zA-Z0-9]+)\=\>([a-zA-Z0-9]+)(?:: ([?a-zA-Z0-9 ]+)|)(?:\|([a-zA-Z0-9]+)|)(?::>(\S+)|)/g
+const seqregex = /([a-zA-Z0-9]+)(?:\(([a-zA-Z0-9]+)\)|(->)?)(->)?/g
 
   
 
@@ -25,6 +26,8 @@ op2=>operation: Operation 2|department2
 sub=>subroutine: Go To Google|external:>http://www.google.com
 cond=>condition: Google?
 st(bottom)->op1(bottom)->op2(right)->cond(yes)->sub(bottom)
+cond(no)->e`;
+const layout = `st(bottom)->op1(bottom)->op2(right)->cond(yes)->sub(bottom)
 cond(no)->e`;
 
     const opt = {
@@ -87,20 +90,25 @@ function parseFlowChart(s: string): Map<string, fcsymbol> {
   
 
   let symmap = new Map()
-  let matches = s.match(symbolregex)
+  let matches = [...s.matchAll(symbolregex)].flat()
 
   let co: fcsymbol = undefined
   let ct = 0
 
+  console.log(matches)
+
   
 
   for(let match of matches) {
-    if(symbolregex.test(s)) {
+    if(symbolregex.test(match)) {
       if(co) {
         symmap.set(co.name, co)
       }
 
-      co = {} as fcsymbol
+      co = {
+        opts: new Map<string, fcsymbol>(),
+        back: [],
+      } as fcsymbol
       ct = 1
       continue
     }
@@ -136,42 +144,58 @@ function parseFlowChart(s: string): Map<string, fcsymbol> {
 
 }
 
-function parseRules(s: string, smap: Map<string, fcsymbol>) {
-  let matches = s.match(seqregex)
+function parseRules(s: string, smap: Map<string, fcsymbol>): Map<string, fcsymbol> {
+  let matches = [...s.matchAll(seqregex)].flat()
 
   let ct = 0
-  let opt : string = undefined
+  //let opt : string = undefined
   let last, curr : fcsymbol = null
+
+  console.log(matches)
   
 
   for(let match of matches) {
+    //console.log(match)
 
     if(seqregex.test(match)) {
-      ct = 0
+      console.log(`match ${match}`)
+      ct = 1
       continue
     }
 
     switch(ct) {
       case 1:
         if(smap.has(match)) {
+          console.log("match")
           curr = smap[match]
+          if(last) {
+            console.log("last")
+            curr.back.push(last)
+            last.opts.add(curr)
+          }
         }
-        if(last && opt) {
-          curr.back.push(curr)
-          last.opts.add(opt)
-        }
+        break
+        
       case 3:
-        last = curr
+        last = match ? curr : undefined
+        break
+      default:
+        
 
 
 
 
     }
+    console.log(ct)
+
+    ct += 1
 
 
 
 
   }
+  console.log(smap)
+  return smap
 
 
 }
@@ -192,7 +216,14 @@ function NoSSRFlowchart(props) {
     setCount(count + 1)
   }
 
-  setSymmap(parseFlowChart(props.code))
+  
+  
+
+  useEffect(() => {
+    setSymmap(parseRules(layout, parseFlowChart(code)))
+    console.log(symmap)
+
+  },[])
 
   
 
