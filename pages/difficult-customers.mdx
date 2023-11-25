@@ -1,0 +1,58 @@
+# Greeting Customers
+
+We greet customers dozens of times each day. Handling customers can be
+tricky because you have to be atuned to how a customer might react to what
+you say. This page will deal with the proper way to handle customers and how to
+deal with upset or difficult customers.
+
+It's good to remember that each customer has had a whole day. It could be a good day or
+a bad day, but they had some kind of day dealing with some kind of problem just like you.
+A lot of people who come in will have spent many hours working hard or are anxious to make a deadline. They may see us as a barrier
+between them and the equipment they need to finish their job. Customers will sometimes get upset with you
+when you give them bad news and there's no way around it. It might feel tempting to cave to
+a customer who is desparate to do something that is against our policies, but it's important 
+to remember that our policies are written to protect ourselves and customers.
+
+Sometimes you might not feel confident that you know our policies well enough and a customer
+might say something along the lines of
+
+### "Well, *I've* done this before"
+
+This is *never* a good enough reason to do anything for a customer. If you're feeling unsure, don't be afraid to ask your manager.
+
+
+
+
+
+
+import ComponentWithNoSSR from '../components/flowchartwrap'
+
+<ComponentWithNoSSR code={
+    `st=>start: Customer is upset
+
+
+
+op1=>condition: Do you know\n the relevant policies?
+
+op2=>operation: Review relevant\n policies with your manager
+
+
+
+sub=>end: Refer to your manager
+
+qp=>condition: Can you help\n the customer?
+
+cond=>condition: Can the customer\n find what they want\n somewhere else?
+
+question=>end: Redirect the customer
+
+sorry=>end: Politely apologize
+
+tbs=>end: Troubleshoot with customer:>/troubleshooting
+
+st(bottom)->op1(yes)->qp(yes)->cond(no)->tbs
+cond(yes)->question
+qp(no)->sorry
+op1(no)->op2->sub`
+
+}/>

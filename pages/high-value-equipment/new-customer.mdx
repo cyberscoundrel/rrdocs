@@ -1,0 +1,49 @@
+# New Customers
+
+New customers recieving high value items(over $5000 in value) are subject
+to more scrutiny and screening than customers for smaller less valuable pieces
+of equipment. Nothing can be as disrupting to a rental business than 
+a large and expensive piece of equipment being stolen, so we have to be
+extra careful especially with new customers.
+
+This includes:
+
+ - Trucks
+ - Trailers
+ - Skid steers
+ - Excavators
+ - 8hp Tillers
+ - 18" sod cutters
+ - Micro trencers
+ - Roller paver
+ - Generators
+ - Walk behind grinders
+ - Walk behind cement saws
+
+import ComponentWithNoSSR from '../../components/flowchartwrap'
+
+<ComponentWithNoSSR code={
+    `st=>start: pick up
+
+e=>end: End
+
+op1=>operation: how can we help|department1
+
+
+
+sub=>subroutine: reservation procedure|external:>/reservation
+
+qp=>subroutine: question procedure
+
+cond=>condition: reservation?
+
+question=>condition: question?
+
+st(right)->op1(bottom)->cond(yes)->sub->op1
+
+cond(no)->question(yes)->qp(right)->op1(right)
+
+question(no)->e`
+
+}/>
+

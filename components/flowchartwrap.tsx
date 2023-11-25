@@ -244,7 +244,7 @@ function NoSSRFlowchart(props) {
 
   return (
     <div>
-        <ComponentWithNoSSR chartCode={code} options={opt}/>
+        <ComponentWithNoSSR chartCode={props.code} options={opt}/>
         <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
         <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
     </div>

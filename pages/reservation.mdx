@@ -1,0 +1,31 @@
+import ComponentWithNoSSR from '../components/flowchartwrap'
+
+<ComponentWithNoSSR code={`st=>start: customer requests item to be reserved
+
+e=>end: placeholder enter reservation
+
+e2=>end: no reservation
+
+op1=>operation: what|department1
+
+check=>subroutine: check availability
+
+op2=>operation: who|department2
+
+op3=>operation: when|department1
+
+op4=>operation: where|department2
+
+op5=>operation: why|department1
+
+
+
+cond=>condition: available?
+
+alt=>condition: aternative?
+
+st->op1->check->cond(no)->alt(no)->e2
+
+alt(yes)->op2
+
+cond(yes)->op2->op3->op4->op5`}/>
