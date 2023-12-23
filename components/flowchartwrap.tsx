@@ -220,7 +220,7 @@ function NoSSRFlowchart(props) {
   
 
   useEffect(() => {
-    setSymmap(parseRules(layout, parseFlowChart(code)))
+    setSymmap(parseRules(layout, parseFlowChart(props.code)))
     console.log(symmap)
 
   },[])

@@ -21,12 +21,14 @@
     "flowchart.js": "^1.17.1",
     "next": "^13.0.6",
     "nextra": "latest",
-    "nextra-theme-docs": "latest",
+    "nextra-theme-docs": "./nextra/packages/nextra-theme-docs",
     "pnpm": "^8.10.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-simple-flowchart": "^1.2.4"
+    "react-simple-flowchart": "^1.2.4",
+    "tailwindcss": "^3.4.0",
+    "tsup": "^8.0.1"
   },
   "devDependencies": {
     "@types/node": "18.11.10",

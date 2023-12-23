@@ -4,3 +4,6 @@
 [submodule "src/react-simple-flowchart"]
 	path = src/react-simple-flowchart
 	url = https://github.com/alwinn1977/react-simple-flowchart.git
+[submodule "nextra"]
+	path = nextra
+	url = https://github.com/shuding/nextra.git
